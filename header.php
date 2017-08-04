@@ -25,34 +25,37 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wpblanky' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			if(esc_attr(get_option('enable_bootstrap'))): ?>
-                <img class="website_logo img-responsive" src="<?php echo esc_attr(get_option('website_logo')); ?>">
-            <?php endif;
-			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-			endif;
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
-			endif; ?>
-		</div><!-- .site-branding -->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="<?php echo home_url();?>">
+                        <?php
+                        if(esc_attr(get_option('enable_bootstrap'))): ?>
+                            <img class="website_logo img-responsive" src="<?php echo esc_attr(get_option('website_logo')); ?>">
+                        <?php endif; ?>
+                    </a>
+                </div>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wpblanky' ); ?></button>
-			<?php
-				wp_nav_menu( array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				) );
-			?>
-		</nav><!-- #site-navigation -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <?php
+                    wpblanky_nav();
+                    ?>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

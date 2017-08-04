@@ -47,6 +47,18 @@ if ( ! function_exists( 'wpblanky_setup' ) ) :
 			'menu-1' => esc_html__( 'Primary', 'wpblanky' ),
 		) );
 
+        function wpblanky_nav()
+        {
+            wp_nav_menu( array(
+                'theme_location' => 'menu-1',
+                'menu_id'        => 'primary-menu',
+                'items_wrap' => '<ul class="nav navbar-nav navbar-right">%3$s</ul>',
+                'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
+                'walker'          => new wp_bootstrap_navwalker()
+            ) );
+        }
+
+
 		/*
 		 * Switch default core markup for search form, comment form, and comments
 		 * to output valid HTML5.
@@ -238,6 +250,15 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * Load custom WordPress nav walker.
+ */
+if ( ! class_exists( 'wp_bootstrap_navwalker' )) {
+    require_once(get_template_directory() . '/inc/wp_bootstrap_navwalker.php');
+}
+
+
 
 
 
